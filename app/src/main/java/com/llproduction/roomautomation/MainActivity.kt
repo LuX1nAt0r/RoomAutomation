@@ -16,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+
+import com.llproduction.roomautomation.ui.home.Home
 import com.llproduction.roomautomation.ui.theme.RoomAutomationTheme
 
 class MainActivity : ComponentActivity() {
@@ -28,41 +30,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Androd")
+                    Home {
+
+                    }
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    var testText by remember {
-        mutableStateOf("Test")
-    }
-    
-    Column(verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-        Text(text = testText)
 
-        Button(
-
-
-            onClick = { testText = "Pressed"},
-        ) {
-            Text(text = "Press")
-
-        }
-    }
-    
-    
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    RoomAutomationTheme {
-        Greeting("Android")
-    }
-}
