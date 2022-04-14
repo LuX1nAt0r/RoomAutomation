@@ -3,6 +3,7 @@ package com.llproduction.roomautomation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 import com.llproduction.roomautomation.ui.home.Home
+import com.llproduction.roomautomation.ui.home.HomeViewModel
 import com.llproduction.roomautomation.ui.theme.RoomAutomationTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,9 +32,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Home {
-
-                    }
+                    Home()
                 }
             }
         }

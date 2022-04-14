@@ -6,27 +6,42 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.tooling.preview.Preview
-import com.llproduction.roomautomation.ui.theme.RoomAutomationTheme
+import kotlin.reflect.KSuspendFunction0
+
 
 @Composable
 fun Home(
-    onButtonClick: () -> Unit?,
+    viewModel: HomeViewModel = HomeViewModel()
+){
+    val tvButtonPress = viewModel.tvButtonPress.collectAsState()
+    
+    Home(
+        buttonPress = tvButtonPress,
+        onClick = viewModel::updateTextView
+    )
+}
 
+
+
+@Composable
+fun Home(
+    buttonPress: State<String>,
+    onClick: KSuspendFunction0<Unit>
 ) {
     var testText by remember {
         mutableStateOf("Test")
     }
 
+
     Column(verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = testText)
+        Text(text = buttonPress.value)
 
         Button(
 
 
-            onClick = { testText = "Pressed"},
+            onClick = { onClick},
         ) {
             Text(text = "Press")
 
