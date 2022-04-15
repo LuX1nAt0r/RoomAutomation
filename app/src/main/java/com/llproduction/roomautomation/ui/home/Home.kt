@@ -26,7 +26,7 @@ fun Home(
 @Composable
 fun Home(
     buttonPress: State<String>,
-    onClick: KSuspendFunction0<Unit>
+    onClick: () -> Unit
 ) {
     var testText by remember {
         mutableStateOf("Test")

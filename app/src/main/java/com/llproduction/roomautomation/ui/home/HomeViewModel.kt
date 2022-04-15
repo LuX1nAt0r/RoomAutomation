@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 
 class HomeViewModel: ViewModel() {
@@ -14,9 +15,10 @@ class HomeViewModel: ViewModel() {
     val tvButtonPress: StateFlow<String> get() = _tvButtonPress
 
 
-
-    suspend fun updateTextView() {
-        _tvButtonPress.emit("Pressed")
+    fun updateTextView() {
+        viewModelScope.launch {
+            _tvButtonPress.emit("Pressed")
+        }
     }
 
 }
