@@ -17,7 +17,7 @@ fun Home(
     
     Home(
         buttonPress = tvButtonPress,
-        onClick = viewModel::updateTextView
+        onButtonClick = viewModel::updateTextView
     )
 }
 
@@ -26,7 +26,7 @@ fun Home(
 @Composable
 fun Home(
     buttonPress: State<String>,
-    onClick: () -> Unit
+    onButtonClick: () -> Unit
 ) {
     var testText by remember {
         mutableStateOf("Test")
@@ -41,7 +41,7 @@ fun Home(
         Button(
 
 
-            onClick = { onClick},
+            onButtonClick
         ) {
             Text(text = "Press")
 

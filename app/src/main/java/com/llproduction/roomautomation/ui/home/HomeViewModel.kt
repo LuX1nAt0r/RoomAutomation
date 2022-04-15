@@ -11,13 +11,20 @@ import kotlinx.coroutines.launch
 class HomeViewModel: ViewModel() {
 
     private var _tvButtonPress: MutableStateFlow<String> =
-        MutableStateFlow("Hello World")
+        MutableStateFlow("Unpressed")
     val tvButtonPress: StateFlow<String> get() = _tvButtonPress
 
 
     fun updateTextView() {
         viewModelScope.launch {
-            _tvButtonPress.emit("Pressed")
+
+
+            when (_tvButtonPress.value){
+                "Pressed" -> _tvButtonPress.emit("Unpressed")
+                "Unpressed" -> _tvButtonPress.emit("Pressed")
+            }
+
+
         }
     }
 
