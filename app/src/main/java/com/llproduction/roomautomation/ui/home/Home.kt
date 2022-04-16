@@ -8,9 +8,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import kotlin.reflect.KSuspendFunction0
 
-@Preview
+/*@Preview
 @Composable
 fun Home(
     viewModel: HomeViewModel = HomeViewModel()
@@ -21,41 +22,48 @@ fun Home(
         buttonPress = tvButtonPress,
         onButtonClick = viewModel::updateTextView
     )
-}
+}*/
 
 
 
 @Composable
 fun Home(
-    buttonPress: State<String>,
-    onButtonClick: () -> Unit
+    viewModel: HomeViewModel = HomeViewModel()
 ) {
 
     Column(verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = buttonPress.value)
 
-        Button(
-
-
-            onButtonClick
-        ) {
-            Text(text = "Press")
-
-        }
-
-        var sliderPosition by remember { mutableStateOf(0f)}
-
-        Slider(
-            value = sliderPosition,
-            onValueChange = {sliderPosition = it},
-            onValueChangeFinished = {}
+        BlindsButtons(blind = Blind(
+            name = "Rollo Links",
+            blindState = viewModel.blindLeftState.value
+            ), viewModel = viewModel
         )
+
+
 
 
     }
 
 
+}
+
+@Composable
+fun BlindsButtons(blind: Blind, viewModel: HomeViewModel) {
+    Column() {
+        Button(onClick = {
+            viewModel.updateBlind(blind.apply { blind.blindState = 0.0f })
+        }) {
+            Text(text = "${blind.name} Open")
+        }
+        Button(onClick = { blind.blindState = 0.5f }) {
+            Text(text = "${blind.name} Half Open")
+        }
+        Button(onClick = { blind.blindState = 1.0f }) {
+            Text(text = "${blind.name} Close" )
+        }
+
+    }
 }
 

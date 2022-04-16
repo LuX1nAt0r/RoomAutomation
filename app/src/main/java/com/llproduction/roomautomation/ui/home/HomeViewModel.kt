@@ -14,6 +14,12 @@ class HomeViewModel: ViewModel() {
         MutableStateFlow("Unpressed")
     val tvButtonPress: StateFlow<String> get() = _tvButtonPress
 
+    private var _blindLeftState: MutableStateFlow<Float> =
+        MutableStateFlow(0.5f)
+    val blindLeftState: StateFlow<Float> get() = _blindLeftState
+
+
+
 
     fun updateTextView() {
         viewModelScope.launch {
@@ -25,6 +31,13 @@ class HomeViewModel: ViewModel() {
             }
 
 
+        }
+    }
+
+
+    fun updateBlind(blind: Blind) {
+        viewModelScope.launch {
+            _blindLeftState.emit(blind.blindState)
         }
     }
 
