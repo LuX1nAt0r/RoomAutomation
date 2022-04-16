@@ -1,8 +1,8 @@
-package com.llproduction.roomautomation.ui.home
+package com.llproduction.roomautomation.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -17,6 +17,10 @@ class HomeViewModel: ViewModel() {
     private var _blindLeftState: MutableStateFlow<Float> =
         MutableStateFlow(0.5f)
     val blindLeftState: StateFlow<Float> get() = _blindLeftState
+
+    private var _blindRightState: MutableStateFlow<Float> =
+        MutableStateFlow(0.5f)
+    val blindRightState: StateFlow<Float> get() = _blindRightState
 
 
 
@@ -37,7 +41,18 @@ class HomeViewModel: ViewModel() {
 
     fun updateBlind(blind: Blind) {
         viewModelScope.launch {
-            _blindLeftState.emit(blind.blindState)
+            when (blind.name){
+                "Rollo Links" -> {
+                    _blindLeftState.emit(blind.blindState)
+                }
+                "Rollo Rechts" -> {
+                    _blindRightState.emit(blind.blindState)
+                }
+            }
+
+
+        // _blindLeftState.emit(blind.blindState)
+            //Log.i("Blind", blindLeftState.value.toString())
         }
     }
 
